@@ -1,56 +1,67 @@
 /**
-	Zitat extension
+	Demonstratio extension
 	copyright by: Erik Wittern
 **/
-var tagList = [];
+var tags = [];
+var metaData = {};
+var currentUrl;
+var serverUrl = "http://localhost:3000/";
 
 chrome.extension.onRequest.addListener(function(data) {
 	// 'data' will be sent multiple times, due to injection of selector.js in all frames. 
 	// Use only actual selection:
-	if(data.zitat != ''){
-		$('#zitat_content').html("\"" + data.zitat + "\"");
-		// Make font smaller if zitat is long:
-		if(data.zitat.length > 150){
-			$('#zitat_content').css("font-size", "24px");
-		}
-		$('#author_content').html(data.author);
-		if(data.title.length > 60){
-			$('#title_content').html("\"" + data.title.substring(0,60) + "...\"");
-		} else {
-			$('#title_content').html("\"" + data.title + "\"");
-		}
-		if(data.source.length > 60){
-			$('#source_content').html(data.source.substring(0,60) + "...");
-		} else {
-			$('#source_content').html(data.source);
-		}
-		
-		console.log(data.keywords);
-		data.keywords.map(function(item){
-			$("#tag_form_text").tagit("createTag", item);
-		})
-	}
+	metaData = data;
+	renderMetaData();
 });
 
 
-function postZitat(){
-	document.getElementById('zitat_content').innerHTML = "\"Sent!\"";
-	setTimeout(function(){
-		window.close();
-	},500);
+function renderMetaData(){
+	$('#title').html(metaData.title);
+	$('#description').html(metaData.description);
+	$('#author').html(metaData.author);
+	$('#url').html(metaData.url);
 };
+
+
+function postBookmark(){
+	if(validate()){
+		metaData.tags = tags;
+		$.post(
+			serverUrl + "bookmarks",
+			metaData,
+			function(data){
+				$("#meta").html("<h1>Successfully sent!</h1>");
+				setTimeout(function(){
+					window.close();
+				}, 500);
+			}
+		);
+	} else {
+		$("#tag_form_p").addClass("error");
+		setTimeout(function(){
+			$("#tag_form_p").removeClass("error");
+		}, 500);
+	}
+};
+
+function validate(){
+	if(tags.length > 0){
+		return true;
+	}
+	return false;
+}
 
 
 window.onload = function() {
 	// Create listener for "Submit zitat" button:
-	document.getElementById('submit_zitat_btn').onclick = postZitat;
+	document.getElementById('submit_btn').onclick = postBookmark;
 
 	// Inject selector.js into all frames in the active tab.
 	chrome.windows.getCurrent(function (currentWindow) {
 	chrome.tabs.query({active: true, windowId: currentWindow.id},
 		function(activeTabs) {
 			chrome.tabs.executeScript(
-				activeTabs[0].id, {file: 'js/selector.js', allFrames: true});
+				activeTabs[0].id, {file: 'js/selector.js', allFrames: false});
 		});
 	});
 }
@@ -58,15 +69,40 @@ window.onload = function() {
 $(document).ready(function() {
 	$("#tag_form_text").tagit({
 		beforeTagAdded: function(event, ui) {
-        	tagList.push(ui.tagLabel);
-        	console.log(tagList);
+        	tags
+        .push(ui.tagLabel);
+        	console.log(tags
+        	);
     	},
     	beforeTagRemoved: function(event, ui) {
-    		var index = tagList.indexOf(ui.tagLabel);
+    		var index = tags
+    	.indexOf(ui.tagLabel);
     		if (index > -1) {
-    			tagList.splice(index, 1);
+    			tags
+    		.splice(index, 1);
 			}
-    		console.log(tagList);
-    	}
+    		console.log(tags
+    		);
+    	},
+    	autocomplete: { 
+			source: function( request, response ) { 
+				// var filter = request.term.toLowerCase();
+				var filter = request.term.toLowerCase();
+				$.ajax({
+					type: "GET",
+					url: serverUrl + "tags",
+					dataType: "json",
+					success: function(data){
+						response( $.grep(data, function(element) {
+							// Only match autocomplete options that begin with the search term.
+							// (Case insensitive.)
+							return (element.toLowerCase().indexOf(filter) === 0);
+						}));
+					}
+				});
+			},
+			delay: 0, 
+			minLength: 1
+		}
 	});
 });

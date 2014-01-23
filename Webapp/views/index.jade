@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	br
+	form#tag_form
+		input#tag_search_form_text(placeholder="Search for tags...")
+	p Sort by: 
+		span#name_sort Name 
+		span#date_sort Date 
+
+	.container
+		ul.list
+			each item in bookmarks
+				li
+					h3
+						a(class="title", href="#{item.url}") #{item.title}
+					p.description #{item.description}
+					span.created_hidden #{item.created}
+					p.created #{item.created}
+					ul.tags
+						each tag in item.tags
+							li
+								a.tag= tag

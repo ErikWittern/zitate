@@ -1,0 +1,12 @@
+ul.list
+	each item in bookmarks
+		li
+			h3
+				a(class="title", href="#{item.url}") #{item.title}
+			p.description #{item.description}
+			span.created_hidden #{item.created}
+			p.created #{item.created}
+			ul.tags
+				each tag in item.tags
+					li
+						a.tag= tag

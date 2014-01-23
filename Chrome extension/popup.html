@@ -4,41 +4,29 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Zitate</title>
+        <title>Demonstratio Chrome Extension</title>
         <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/tag-it.min.js" type="text/javascript" charset="utf-8"></script>
         <script src='js/popup.js'></script>
         
-        <link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
         <link href="css/jquery.tagit.css" rel="stylesheet">
         <link href="css/tagit.ui-zendesk.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-        <div id="zitat">
-            <h3 class="zitat_content" id="zitat_content">
-                Please select text on the Web site and press button again!
-            </h3>
-        </div>
         <div id="meta">
-            <p>
-                <span id="author_content"></span> <br>
-                <span id="title_content"></span> <br>
-                <span id="source_content"></span>
-            </p>
-            <!--
-            <p class="source_label">Source: </span><span class="source_content" id="source_content"></p>
-            <p class="title_label">Title: </span><span class="title_content" id="title_content"></p>
-            <p class="author_label">Author: </span><span class="author_content" id="author_content"></p>
-            -->
+            <h1 id="title">Title</h1>
+            <p id="description">Description</p>
+            <p id="author">Author</p>
+            <p id="url">Url</p>
         </div>
         <div id="input">
             <form id="tag_form">
-                <p>
-                    <input type="text" id="tag_form_text" placeholder="Tags...">
+                <p id="tag_form_p">
+                    <input type="text" id="tag_form_text" placeholder="Please provide tags...">
                 </p>
-                <button type="button" id="submit_zitat_btn">Submit zitat...</button>
+                <button type="button" id="submit_btn">Submit bookmark...</button>
             </form>
         </div>
     </body>

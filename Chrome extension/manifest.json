@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
-	"name": "Zitate",
-	"description": "This extension allows to extract citations from a Web page.",
+	"name": "Demonstratio",
+	"description": "This extension allows to post bookmarks to demonstratio.com.",
 	"version": "0.1",
 	"minimum_chrome_version": "16.0.884",
 	"permissions": ["<all_urls>"],
