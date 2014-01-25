@@ -62,7 +62,21 @@ exports.retrieveByTags = function(req, res){
 };
 
 
-
+/*
+ * POST like:
+ */
+exports.updateLikes = function(req, res){
+	console.log("Update likes of " + req.params.id + " with likes: " + req.body.likes);
+	Bookmark.update(
+		{_id: req.params.id},
+		{likes: req.body.likes},
+		{multi: false},
+		function(err, rows_updated) {
+			if (err) throw err;
+			res.send(req.body.likes);
+		}
+	);
+};
 
 
 

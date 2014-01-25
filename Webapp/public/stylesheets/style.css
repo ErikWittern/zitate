@@ -7,20 +7,68 @@ a {
   color: #00B7FF;
 }
 
-div.container{
-  padding: 0px;
-  margin: 0px;
-}
-
-.list{
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
-}
-
-span.created_hidden{
+/**
+  GENERAL CLASSES:;
+**/
+.hidden{
   display: none;
 }
+
+.triangle_up {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #2f2f2f;
+  cursor: pointer;
+}
+.triangle_up:hover {
+  border-bottom: 15px solid #aaaaaa;  
+}
+
+.triangle_down {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #2f2f2f;
+  cursor: pointer;
+}
+.triangle_down:hover {
+  border-top: 15px solid #aaaaaa;  
+}
+
+/**
+  DIVS:
+**/
+#container{
+  padding: 0px;
+  margin: 0px;
+}
+
+#sorting{
+  float: right;
+  width: 200px;
+}
+
+#search{
+  overflow: hidden;
+}
+
+.bookmark{
+  /**/
+}
+
+.likes{
+  float: left;
+  width: 50px;
+  text-align: center;
+}
+
+.description{
+  overflow: hidden;
+}
+
 
 /* TAGS */
 .tags {

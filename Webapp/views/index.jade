@@ -2,20 +2,28 @@ extends layout
 
 block content
 	br
-	form#tag_form
-		input#tag_search_form_text(placeholder="Search for tags...")
-	p Sort by: 
-		span#name_sort Name 
-		span#date_sort Date 
+	div#search
+		form#tag_form
+			input#tag_search_form_text(placeholder="Search for tags...")
+	div#sorting
+		p Sort by: 
+			span#name_sort Name 
+			span#date_sort Date 
+			span#likes_sort Likes 
 
-	.container
-		ul.list
-			each item in bookmarks
-				li
+	#container
+		each item in bookmarks
+			div.bookmark
+				div.likes
+					div.triangle_up(data-id="#{item._id}")
+					h2#likes #{item.likes}
+					div.triangle_down(data-id="#{item._id}")
+				div.description
 					h3
 						a(class="title", href="#{item.url}") #{item.title}
 					p.description #{item.description}
-					span.created_hidden #{item.created}
+					span.hidden#created #{item.created}
+					span.hidden#id #{item._id}
 					p.created #{item.created}
 					ul.tags
 						each tag in item.tags

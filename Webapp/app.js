@@ -31,6 +31,7 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.post('/bookmarks', bookmark.create);
 app.post('/bookmarks/dummies', bookmark.createDummies);
+app.post('/bookmarks/likes/:id?', bookmark.updateLikes);
 app.get('/bookmarks/:tags?', bookmark.retrieveByTags);
 app.get('/tags', tag.retrieve);
 

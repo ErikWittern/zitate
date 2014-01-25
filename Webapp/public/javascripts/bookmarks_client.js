@@ -2,9 +2,9 @@ $(document).ready(function() {
 
 	var tags = [];
 
-	/**
-	 * Add tag-it.js
-	 */
+	//////////////////////////////////
+	// Add tag-it.js
+	//////////////////////////////////
 	$("#tag_search_form_text").tagit({
 		beforeTagAdded: function(event, ui) {
 			tags.push(ui.tagLabel);
@@ -19,7 +19,6 @@ $(document).ready(function() {
 		},
 		autocomplete: { 
 			source: function( request, response ) { 
-				// var filter = request.term.toLowerCase();
 				var filter = request.term.toLowerCase();
 				$.ajax({
 					type: "GET",
@@ -41,24 +40,63 @@ $(document).ready(function() {
 	});
 
 
-	/**
-	 * Sorting:
-	 */
+	//////////////////////////////////
+	// Sorting:
+	//////////////////////////////////
 	$("#name_sort").click(function(){
-		$('ul.list>li').tsort('a.title');
+		$('#container>div.bookmark').tsort('a.title');
 	});
 	$("#date_sort").click(function(){
-		$('ul.list>li').tsort('span.created_hidden', {order:'desc'});
+		$('#container>div.bookmark').tsort('span#created', {order:'desc'});
 	});
 
-	/*
-	 * Apply moment formatting
-	 */
-	$('ul.list>li').find('p.created').each(function(){
-		// Thu Jan 23 2014 09:06:05 GMT+0100 (CET)
+	$("#likes_sort").click(function(){
+		console.log("Likes...");
+		$('#container>div.bookmark').tsort('h2#likes', {order:'desc'});
+	});
+
+	//////////////////////////////////
+	// Liking / Disliking:
+	//////////////////////////////////
+	 $('.triangle_up').click(function(){
+	 	var likes = Number($(this).next().html()) + 1;
+	 	var self = this;
+	 	$.ajax({
+	 		type: 'POST',
+	 		url: 'bookmarks/likes/' + $(self).attr('data-id'), 
+	 		data: {
+	 			likes: likes
+	 		},
+	 		success: function(data){
+	 			$(self).next().html(data);
+	 		}
+	 	});
+	 });
+
+	$('.triangle_down').click(function(){
+	 	var likes = Number($(this).prev().html()) - 1;
+	 	var self = this;
+	 	$.ajax({
+	 		type: 'POST',
+	 		url: 'bookmarks/likes/' + $(self).attr('data-id'), 
+	 		data: {
+	 			likes: likes
+	 		},
+	 		success: function(data){
+	 			$(self).prev().html(data);
+	 		}
+	 	});
+	 });
+
+
+	//////////////////////////////////
+	// Apply moment formatting
+	//////////////////////////////////
+	$('#container>div.bookmark').find('p.created').each(function(){
 		$(this).html(moment($(this)).fromNow())
 	});
 });
+
 
 var getBookmarks = function(tags){
 	$.get( 
@@ -67,9 +105,8 @@ var getBookmarks = function(tags){
 			tags: tags
 		},
 		function(data) {
-			$(".container").html(data);
-			$('ul.list>li').find('p.created').each(function(){
-				// Thu Jan 23 2014 09:06:05 GMT+0100 (CET)
+			$("#container").html(data);
+			$('#container>div.bookmark').find('p.created').each(function(){
 				$(this).html(moment($(this)).fromNow())
 			});
 		}
