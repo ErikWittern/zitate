@@ -2,7 +2,6 @@ doctype html
 html
 	head
 		title= "Demonstratio"
-		link(rel='stylesheet', href='/stylesheets/bootstrap.css')
 		link(rel='stylesheet', href='/stylesheets/jquery.tagit.css')
 		link(rel='stylesheet', href='/stylesheets/tagit.ui-zendesk.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
@@ -14,11 +13,18 @@ html
 		script(src='/javascripts/moment.js')
 
 	body
-		div.navbar.navbar-fixed-top.navbar-default
-			div.navbar-header.pull-left
-				a.navbar-brand Demonstratio
-			div.navbar-header.pull-right
-				button.btn.btn-default.navbar-btn Button 1
-				button.btn.btn-default.navbar-btn Button 2
+		nav
+			div.pull-left
+				a Demonstratio
+			div.pull-right
+				ul
+					li
+						if (user)
+							p #{user.local.email}
+							a(href="/logout") Logout
+						else
+							a(href="/login") Login
+					li
+						a(href="/signup") Signup
 
 		block content

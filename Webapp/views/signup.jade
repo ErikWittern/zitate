@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	// show any messages that come back with authentication
+	- if (message) 
+		div.alert message
+
+	// Signup form
+	form(action="/signup" method="post")
+		label Email
+			input(type="text" name="email")
+		label Password
+			input(type="password" name="password")
+		button(type="submit") Signup
+
+	p Already have an account?
+		a(href="/login") Login...

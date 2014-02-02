@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1 Profile:
+
+	// Login form
+	p #{user._id}
+	p #{user.local.email}
+	p #{user.local.password}
+
+	a(href="/logout") Logout...

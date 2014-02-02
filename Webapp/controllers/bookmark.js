@@ -3,17 +3,6 @@ var Bookmark = require('../models/bookmark.js'),
 
 
 /*
- * Connect to Mongo when app initializes:
- */
-mongoose.connect( 'mongodb://localhost/bookmarks' );
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback () {
-	console.log("Connection to DB established.");
-});
-
-
-/*
  * POST bookmark:
  */
 exports.create = function(req, res){
