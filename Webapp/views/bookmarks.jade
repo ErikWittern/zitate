@@ -1,10 +1,15 @@
-ul.list
-	each item in bookmarks
-		li
+each item in bookmarks
+	div.col-sm-6.col-lg-4
+		div.likes
+			div.triangle_up(data-id="#{item._id}")
+			h2#likes #{item.likes}
+			div.triangle_down(data-id="#{item._id}")
+		div.description
 			h3
 				a(class="title", href="#{item.url}") #{item.title}
 			p.description #{item.description}
-			span.created_hidden #{item.created}
+			span.hidden#created #{item.created}
+			span.hidden#id #{item._id}
 			p.created #{item.created}
 			ul.tags
 				each tag in item.tags

@@ -44,15 +44,15 @@ $(document).ready(function() {
 	// Sorting:
 	//////////////////////////////////
 	$("#name_sort").click(function(){
-		$('#container>div.bookmark').tsort('a.title');
+		$('#container>div').tsort('a.title');
 	});
 	$("#date_sort").click(function(){
-		$('#container>div.bookmark').tsort('span#created', {order:'desc'});
+		$('#container>div').tsort('span#created', {order:'desc'});
 	});
 
 	$("#likes_sort").click(function(){
 		console.log("Likes...");
-		$('#container>div.bookmark').tsort('h2#likes', {order:'desc'});
+		$('#container>div').tsort('h2#likes', {order:'desc'});
 	});
 
 	//////////////////////////////////

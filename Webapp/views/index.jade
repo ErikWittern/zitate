@@ -1,19 +1,19 @@
 extends layout
 
 block content
-	br
-	div#search
-		form#tag_form
-			input#tag_search_form_text(placeholder="Search for tags...")
-	div#sorting
-		p Sort by: 
-			span#name_sort Name 
-			span#date_sort Date 
-			span#likes_sort Likes 
+	div.container-fluid
+		div.col-sm-9
+			form#tag_form
+				input#tag_search_form_text(placeholder="Search for tags...")
+		div.col-sm-3
+			p Sort by: 
+				span#name_sort Name 
+				span#date_sort Date 
+				span#likes_sort Likes 
 
-	#container
+	div#container.container-fluid
 		each item in bookmarks
-			div.bookmark
+			div.col-sm-6.col-lg-4
 				div.likes
 					div.triangle_up(data-id="#{item._id}")
 					h2#likes #{item.likes}

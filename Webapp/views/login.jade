@@ -1,17 +1,20 @@
 extends layout
 
 block content
-	// show any messages that come back with authentication
-	- if (message)
-		div.alert message
+	div.col-sm-6.col-sm-offset-3
+		h2 Login:
+		// show any messages that come back with authentication
+		if(message.length != 0)
+			div.alert.alert-danger #{message}
+		// Login form
+		form(action="/login" method="post")
+			div.form-group
+				label Email
+				input.form-control(type="text" name="email")
+			div.form-group
+				label Password
+				input.form-control(type="password" name="password")
+			button.btn.btn-warnung.btn.lg(type="submit") Login
 
-	// Login form
-	form(action="/login" method="post")
-		label Email
-			input(type="text" name="email")
-		label Password
-			input(type="password" name="password")
-		button(type="submit") Login
-
-	p Need an account?
-		a(href="/signup") Signup...
+		p Need an account? 
+			a(href="/signup") Signup...
