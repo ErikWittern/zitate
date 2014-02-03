@@ -8,7 +8,11 @@ exports.index = function(req, res){
 			console.log("Error retrieving bookmarks from MongoDB: " + err);
 			bookmarks = [];
 		}
-		res.render('index', {title: 'All bookmarks', bookmarks: bookmarks});
+		res.render('index', {
+			title: 'All bookmarks', 
+			bookmarks: bookmarks,
+			user: req.user // get the user out of session and pass to template
+		});
 	});
 };
 
