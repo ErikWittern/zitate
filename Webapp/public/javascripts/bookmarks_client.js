@@ -94,13 +94,6 @@ $(document).ready(function() {
 	 	});
 	 });
 
-
-	//////////////////////////////////
-	// Apply moment formatting
-	//////////////////////////////////
-	$('#container>div.bookmark').find('p.created').each(function(){
-		$(this).html(moment($(this)).fromNow())
-	});
 });
 
 
@@ -112,9 +105,6 @@ var getBookmarks = function(tags){
 		},
 		function(data) {
 			$("#container").html(data);
-			$('#container>div.bookmark').find('p.created').each(function(){
-				$(this).html(moment($(this)).fromNow())
-			});
 		}
 	);
 }

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
-	ObjectId = Schema.ObjectId;
+	moment = require('moment');
 
 var bookmarkSchema = new Schema({
 	url: String,
@@ -9,6 +9,11 @@ var bookmarkSchema = new Schema({
 	created: {type: Date, default: Date.now},
 	tags: [String],
 	likes: {type: Number, default: 0}
+});
+
+// virtual property, using moment.js to beautify 'created'
+bookmarkSchema.virtual('createdWords').get(function(){
+	return moment(this.created).fromNow();
 });
 
 module.exports = mongoose.model('Bookmark', bookmarkSchema);
