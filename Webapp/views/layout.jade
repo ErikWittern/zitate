@@ -13,26 +13,31 @@ html
 		script(src='/javascripts/jquery.tinysort.min.js')
 
 	body
-		nav.navbar-wrapper.navbar-default.navbar
-			div.container-fluid
-				div.navbar-header
-					button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
-						span.sr-only
-						span.icon-bar
-						span.icon-bar
-						span.icon-bar
-					a.navbar-brand(href="/") Demonstratio
-				div.collapse.navbar-collapse.pull-right
-					ul.nav.navbar-nav
-						if (user)
-							li 
-								a(href="/profile") #{user.local.email}
-							li
-								a(href="/logout") Logout
-						else
-							li
-								a(href="/signup") Signup
-							li
-								a(href="/login") Login
+		div#wrap
+			nav.navbar-wrapper.navbar-default.navbar
+				div.container-fluid
+					div.navbar-header
+						button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
+							span.sr-only
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						a.navbar-brand(href="/") Demonstratio
+					div.collapse.navbar-collapse.pull-right
+						ul.nav.navbar-nav
+							if (user)
+								li 
+									a(href="/profile") #{user.local.email}
+								li
+									a(href="/logout") Logout
+							else
+								li
+									a(href="/signup") Signup
+								li
+									a(href="/login") Login
 
-		block content
+			block content
+
+		div#footer
+			div.container-fluid
+				p.navbar-text Built by us... | Copyright

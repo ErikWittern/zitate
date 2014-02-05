@@ -25,7 +25,5 @@ block content
 					span.hidden#created #{item.created}
 					span.hidden#id #{item._id}
 					p.created #{item.createdWords}
-					ul.tags
-						each tag in item.tags
-							li
-								a.tag= tag
+					each tag in item.tags
+						span.label.label-primary= tag
