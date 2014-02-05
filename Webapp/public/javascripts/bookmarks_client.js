@@ -69,6 +69,9 @@ $(document).ready(function() {
 	 		},
 	 		success: function(data){
 	 			$(self).next().html(data);
+	 		},
+	 		error: function(req, status, err){
+	 			console.log(err);
 	 		}
 	 	});
 	 });
@@ -82,8 +85,11 @@ $(document).ready(function() {
 	 		data: {
 	 			likes: likes
 	 		},
-	 		success: function(data){
+	 		success: function(req, data){
 	 			$(self).prev().html(data);
+	 		},
+	 		error: function(req, status, err){
+	 			console.log(err);
 	 		}
 	 	});
 	 });
