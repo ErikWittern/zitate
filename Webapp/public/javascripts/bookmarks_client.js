@@ -59,16 +59,12 @@ $(document).ready(function() {
 	// Liking / Disliking:
 	//////////////////////////////////
 	 $('.triangle_up').click(function(){
-	 	var likes = Number($(this).next().html()) + 1;
 	 	var self = this;
 	 	$.ajax({
 	 		type: 'POST',
 	 		url: 'bookmarks/likes/' + $(self).attr('data-id'), 
-	 		data: {
-	 			likes: likes
-	 		},
 	 		success: function(data){
-	 			$(self).next().html(data);
+	 			$(self).next().html(data.likes);
 	 		},
 	 		error: function(req, status, err){
 	 			console.log(err);
@@ -77,16 +73,12 @@ $(document).ready(function() {
 	 });
 
 	$('.triangle_down').click(function(){
-	 	var likes = Number($(this).prev().html()) - 1;
 	 	var self = this;
 	 	$.ajax({
 	 		type: 'POST',
-	 		url: 'bookmarks/likes/' + $(self).attr('data-id'), 
-	 		data: {
-	 			likes: likes
-	 		},
-	 		success: function(req, data){
-	 			$(self).prev().html(data);
+	 		url: 'bookmarks/dislikes/' + $(self).attr('data-id'), 
+	 		success: function(data){
+	 			$(self).prev().html(data.likes);
 	 		},
 	 		error: function(req, status, err){
 	 			console.log(err);

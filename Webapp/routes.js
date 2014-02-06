@@ -33,7 +33,8 @@ module.exports = function(app, passport) {
 	// BOOKMARKS
 	app.post('/bookmarks', bookmark.create);
 	app.post('/bookmarks/dummies', bookmark.createDummies);
-	app.post('/bookmarks/likes/:id?', isLoggedInAPI, bookmark.updateLikes);
+	app.post('/bookmarks/likes/:id?', isLoggedInAPI, bookmark.increaseLikes);
+	app.post('/bookmarks/dislikes/:id?', isLoggedInAPI, bookmark.decreaseLikes);
 	app.get('/bookmarks/:tags?', bookmark.retrieveByTags);
 	
 	// TAGS
